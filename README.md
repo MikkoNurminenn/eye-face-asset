@@ -49,7 +49,7 @@ coat 0.06/0.28 (oil), roughness = albedo×0.72 + noise, micro bump = Voronoi por
 - Eye: BlenderKit "Realistic Rigged Procedural Eye" by Joshua Jennings (free, Royalty-Free)
 - Blink rig, lash system, skin shader, tear line, fuzz, scripts: © Mikko Nurminen, MIT (see LICENSE)
 
-**Note on redistribution:** the head and eye come from BlenderKit under its Royalty-Free
-license, which allows use in projects but not standalone redistribution of the assets.
-This repository is intended for private sharing with collaborators. If you publish
-derivative work, keep the assets embedded in your project rather than re-sharing them alone.
+**Note on the third-party assets:** the head and eye models come from BlenderKit under its
+Royalty-Free license. Use them inside your own projects and renders; do not extract and
+re-share the head or eye models on their own. If you are the author of either asset and
+want it removed from this repository, open an issue and it will be taken down.
