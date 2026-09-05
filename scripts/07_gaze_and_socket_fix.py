@@ -289,3 +289,19 @@ p.inputs["Subsurface Scale"].default_value = 0.001
 p.inputs["Emission Color"].default_value = (0.42, 0.10, 0.08, 1)
 p.inputs["Emission Strength"].default_value = 0.05
 bpy.ops.wm.save_mainfile(); print("CONJ FINAL SAVED")
+
+# ================= fix_aim_forward.py (lepokatse = pään eteenpäin, ei makrokameran suunta)
+import bpy, math
+from mathutils import Vector
+scene = bpy.context.scene
+eR = bpy.data.objects["Eyeball"]; eL = bpy.data.objects["Eyeball_L"]
+CR = sum((eR.matrix_world @ Vector(v) for v in eR.bound_box), Vector())/8; CL = sum((eL.matrix_world @ Vector(v) for v in eL.bound_box), Vector())/8
+mid = (CR + CL)/2
+rootfwd = (eR.parent.matrix_world.to_3x3() @ Vector((0,0,1))).normalized()
+print("eye root fwd", tuple(round(x,3) for x in rootfwd), "mid", tuple(round(x,4) for x in mid))
+FWD = Vector((0, -1, 0))   # pää on peilisymmetrinen x=0:n suhteen -> suoraan eteen = -Y
+aim = bpy.data.objects["eye_aim"]
+print("eye_aim old", tuple(round(x,3) for x in aim.location))
+aim.location = mid + FWD * 1.0
+print("eye_aim new", tuple(round(x,3) for x in aim.location))
+bpy.ops.wm.save_mainfile(); print("SAVED")

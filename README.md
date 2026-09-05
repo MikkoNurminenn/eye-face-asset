@@ -28,7 +28,7 @@ Asset Browser when you add this folder as an asset library):
 | `FX` | `TearLine(_L)` — wet meniscus tube along the lower lid margin; `PeachFuzz` particle hair (45k, 0.5 mm, whole face) |
 | `LIGHTS_XO` | the dramatic macro lighting used for the previews (default on) |
 | `LIGHTS_Studio` | neutral key / fill / rim (excluded by default — tick it on in the Outliner for a clean look, untick `LIGHTS_XO`) |
-| `CAMERAS` | `hero_socket` (macro, animated push-in, 1080×1920, 30 fps, frames 1–112) and `CAM_face` (both eyes, 70 mm) |
+| `CAMERAS` | `hero_socket` (macro, animated push-in, 1080×1920, 30 fps, frames 1–112), `CAM_face` (both eyes, 3/4 view, 70 mm) and `CAM_front` (straight on, 85 mm) |
 
 ## Animate with `EyeCtrl`
 Select the circle empty **`EyeCtrl`** (between the eyes) and keyframe its custom properties (N-panel → Object → Custom Properties):
@@ -46,8 +46,9 @@ Delete those keys and add your own. Do **not** keyframe the shape keys directly 
 
 How it works under the hood: the lids are a `blink_close` shape key plus an in-between `blink_arc` key (driven `4*v*(1-v)`);
 `LidRelax` (Corrective Smooth) and `LidContact` (Shrinkwrap to the eyeball) keep the lid draped on the globe at every value.
-Gaze is a `DAMPED_TRACK` (+Z = iris axis of this eye rig) to `eye_aim`, which sits 1 m in front of the face;
-`look_x` / `look_y` offset it, `blink` lifts it (Bell's phenomenon). Lashes follow the lids through `CHILD_OF` constraints on the lash pivots.
+Gaze is a `DAMPED_TRACK` (+Z = iris axis of this eye rig) to `eye_aim`, which sits 1 m straight in front of the head, so
+`look_x = look_y = 0` is a neutral forward gaze and both eyes converge on the same point (≈1.8° each, as real eyes do at 1 m);
+`look_x` / `look_y` offset the target, `blink` lifts it (Bell's phenomenon). Lashes follow the lids through `CHILD_OF` constraints on the lash pivots.
 
 ## Skin & socket notes
 - SSS random-walk, radius (1.0, 0.38, 0.19) × 3.7 mm, IOR 1.40, spec 0.55, coat 0.06/0.28 (oil),
@@ -74,7 +75,7 @@ Textures are packed; no external files needed.
 `scripts/` holds the build scripts in the order they were run (reference only; not needed to use the asset):
 01 blink shape key · 02 lid solvers + lash constraints · 03 skin shader, fuzz, tear line · 04 blink dynamics (flutter, Bell) ·
 05 second eye (mirrored displacement field via KD-tree) · 06 EyeCtrl, collections, studio lights, whole-face fuzz ·
-07 gaze rig + socket fix (track axis, eye depth, conjunctiva strip) · 08 face camera preview · 09 demo clips · 10 preview stills.
+07 gaze rig + socket fix (track axis, eye depth, conjunctiva strip, neutral gaze) · 08 face camera preview · 09 demo clips · 10 preview stills · 11 front camera.
 
 ## Credits & licenses
 - Head: BlenderKit "3D Scanned Human Head" (free, Royalty-Free license)
