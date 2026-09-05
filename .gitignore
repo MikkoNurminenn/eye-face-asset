@@ -1,3 +1,9 @@
 *.blend1
 __pycache__/
 .DS_Store
+*_backup.blend
+probe_*.png
+probe_*.py
+eyes_zoom*.png
+demo_frames/
+*.log
